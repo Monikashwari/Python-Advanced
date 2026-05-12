@@ -77,7 +77,7 @@ Useful for:
 
 - Creates structured objects with type hints.
 - Reduces boilerplate code.
-- Type hints are **not validated at runtime by default**.
+- Type hints are **not validated at runtime by default** (only provide us warning and doesn't break code).
 - Invalid data may be accepted without raising errors.
 
 ### Pydantic
@@ -99,7 +99,7 @@ Useful for:
 
 - Defines dictionary structure using type hints.
 - Helps static type checkers and IDEs.
-- Does **not validate data at runtime**.
+- Does **not validate data at runtime** only provide us warning and doesn't break code).
 
 ### Pydantic
 
