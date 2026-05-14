@@ -12,6 +12,31 @@ In Python, async code can pause at `await`, give control back to the event loop,
 
 ---
 
+## What is `asyncio`?
+
+`asyncio` is Python's built-in library for writing **concurrent code** using the `async` and `await` syntax.
+
+It provides the core tools needed for async programming, such as:
+
+- Event loops
+- Coroutines
+- Tasks
+- Scheduling concurrent operations
+
+Almost everything in Python async programming is built on top of `asyncio`.
+
+`asyncio` is the foundation for many Python async frameworks and tools, including:
+
+- High-performance web servers
+- Network applications
+- Database connection libraries
+- Distributed task systems
+- Real-time applications
+
+`asyncio` is especially useful for **I/O-bound tasks** and high-level network programming where your code spends a lot of time waiting for external operations.
+
+---
+
 ## Why async is useful
 
 - Keeps programs responsive during slow operations.
@@ -78,7 +103,7 @@ Result becomes ready
 Coroutine resumes
 ```
 
-Without `await`, the coroutine is only created, not executed.
+Without `await` (or scheduling it as a task), the coroutine is only created and will not run.
 
 ---
 
@@ -116,6 +141,22 @@ async def main():
 
 asyncio.run(main())
 ```
+
+---
+
+## Task
+
+A task is a coroutine scheduled to run by the event loop.
+
+It allows a coroutine to run in the background while other tasks continue.
+
+Example:
+
+```python
+task = asyncio.create_task(fetch_data())
+```
+
+This tells the event loop to start running the coroutine.
 
 ---
 
@@ -223,6 +264,10 @@ The total time becomes closer to the **longest task**, not the sum of all task t
 
 ## The main difference
 
+With async, tasks switch only when they reach `await`.
+
+With multithreading, the operating system can switch threads at any time.
+
 ### Async
 
 ```text
@@ -235,10 +280,6 @@ Task decides when to pause → await
 Operating system decides when to switch threads
 ```
 
-With async, a single thread switches between tasks when they voluntarily pause at `await`.
-
-With multithreading, the operating system switches between threads.
-
 ---
 
 # Practical rules
@@ -246,9 +287,10 @@ With multithreading, the operating system switches between threads.
 1. `async def` creates a coroutine function.
 2. `await` executes and waits for async operations.
 3. `asyncio.run()` starts the event loop.
-4. `await asyncio.sleep()` is non-blocking.
-5. `time.sleep()` is blocking.
-6. `asyncio.gather()` runs multiple coroutines concurrently.
+4. `asyncio.create_task()` schedules coroutines.
+5. `await asyncio.sleep()` is non-blocking.
+6. `time.sleep()` is blocking.
+7. `asyncio.gather()` runs multiple coroutines concurrently.
 
 ---
 
@@ -268,6 +310,7 @@ When reading async code, watch for these patterns:
 - `async def`
 - `await`
 - `asyncio.run(...)`
+- `asyncio.create_task(...)`
 - `asyncio.gather(...)`
 
 Once you understand these patterns, you understand most real-world Python async code.
