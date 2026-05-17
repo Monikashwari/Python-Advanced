@@ -103,6 +103,6 @@ Each topic in this repository includes:
 
 ⭐ **If you find this helpful, give it a star!** ⭐
 
-*Happy Coding!"
+**Happy Coding!**
 
 </div>
